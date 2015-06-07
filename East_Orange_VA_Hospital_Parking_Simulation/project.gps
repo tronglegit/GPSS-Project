@@ -1,0 +1,23 @@
+ 	    SIMULATE
+*
+*       Storage Declaration Segment
+        STORAGE        	S(ATTD),5
+
+* 	GPSS/H Block Section
+
+	GENERATE 	5,3	        create customer arrivals
+	QUEUE      	1	 	customers queue up if necessary
+	ENTER 		ATTD,1          engage an available parking attendant
+	DEPART    	1		customer leaves the queue and go to either lane1, lane2 or lane3
+	ADVANCE 	6,2		attendant takes a car to a parking spot
+        LEAVE		1        	free the attendant
+	TERMINATE	0               not to shut down right now
+        		
+* 	Master generating block
+        GENERATE        720             create a timer after 12 hours of simulated time
+        TERMINATE       1               shut of the run
+      
+*	GPSS/H Control Statements
+            
+	START 		1 		terminate simulation 
+	END                             return control to the operating system
